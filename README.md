@@ -43,3 +43,32 @@ Task: Show distance between two cities
 
 - Test
 - Structure
+
+# Differences
+
+## Deployment
+
+- Vercel, Fly, Railway, DO, Azure, AWS
+
+## Backend
+
+- Serverless API(lambda)
+- Server API(Golang with different frameworks, NodeJS(with JS/TS), Elixir, Python)
+
+## Ideas(Good to have)
+
+- Caching(LRU)
+- Real-time stuff
+
+## Architecture
+
+- Client
+  - Source
+  - Destination
+- API
+  - Maps API(OpenMapsAPI, Google Maps API, Leaflet)
+
+## Questions
+
+- How to plot(or show Maps)? Use an exisiting widget?
+-
