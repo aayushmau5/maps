@@ -5,6 +5,7 @@
 
 .heading {
   text-align: center;
+  font-size: 3rem;
 }
 
 .inputContainer {
@@ -17,26 +18,33 @@
 .addressInput {
   padding: 7px;
   border: 1px solid rgb(181, 181, 181);
+  background-color: transparent;
   outline: none;
   font-size: 1rem;
-  border-radius: 3px;
+  border-radius: 5px;
+  font-family: inherit;
 }
 
 .addressInput:focus {
-  border: 1px solid rgb(16, 16, 16);
+  border: 1px solid #0d9488;
 }
 
 .submitButton {
+  display: block;
   padding: 10px 15px;
-  font-size: 0.9rem;
-  background-color: skyblue;
+  font-size: 1rem;
+  background-color: #0d9488;
   border: 1px solid black;
   cursor: pointer;
   border-radius: 4px;
+  color: white;
+  font-weight: 700;
+  margin: 0 auto;
+  font-family: inherit;
 }
 
 .submitButton:hover {
-  background-color: rgb(161, 224, 249);
+  background-color: #0d9489e0;
 }
 
 .submitButton:disabled {
@@ -51,4 +59,10 @@
 .loading {
   margin: 10px 0;
   text-align: center;
+}
+
+@media (max-width: 1000px) {
+  .parentContainer {
+    width: 90%;
+  }
 }

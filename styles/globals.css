@@ -1,13 +1,12 @@
 #__next {
-  height: 40vh;
+  height: 50vh;
 }
 
 html,
 body {
   padding: 1rem;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: "Source Sans Pro", Arial, Helvetica, sans-serif;
 }
 
 a {
@@ -21,7 +20,14 @@ a {
 
 #map {
   height: 100%;
-  margin: 1rem;
-  border: 5px solid black;
+  width: 50%;
+  border: 5px solid #0d9488;
   border-radius: 15px;
+  margin: 2rem auto;
+}
+
+@media (max-width: 1000px) {
+  #map {
+    width: 90%;
+  }
 }

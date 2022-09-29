@@ -71,4 +71,3 @@ Task: Show distance between two cities
 ## Questions
 
 - How to plot(or show Maps)? Use an exisiting widget?
--

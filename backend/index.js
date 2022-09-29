@@ -25,6 +25,7 @@ function modelDistanceResponse(distanceData) {
   } else {
     output.distance = distanceInformation.distance.text;
     output.duration = distanceInformation.duration.text;
+    output.status = "OK";
   }
 
   return output;
