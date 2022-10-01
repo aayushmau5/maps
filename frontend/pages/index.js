@@ -30,12 +30,12 @@ export default function Home() {
 
     renderPath(data);
     setResponse(data);
+    setLoading(false);
   }
 
   useEffect(() => {
-    // https://medium.com/web-dev-survey-from-kyoto/3-gotchas-of-google-maps-api-when-used-with-next-js-and-eslint-dba627c9657d
     const loader = new Loader({
-      apiKey: "AIzaSyDmjtTVsyS6AA_QIRiK0vZR1R33vpWHi80",
+      apiKey: process.env.NEXT_PUBLIC_API_KEY,
       version: "weekly",
       libraries: ["places"],
     });
@@ -52,12 +52,6 @@ export default function Home() {
       zoomControl: false,
     };
 
-    const autocompleteOptions = {
-      fields: ["formatted_address", "geometry", "name"],
-      strictBounds: false,
-      types: ["establishment"],
-    };
-
     loader
       .load()
       .then(() => {
@@ -69,11 +63,11 @@ export default function Home() {
         const map = new google.maps.Map(googlemap.current, mapOptions);
         const originAutocomplete = new google.maps.places.Autocomplete(
           originInput.current,
-          autocompleteOptions
+          {}
         );
         const destinationAutocomplete = new google.maps.places.Autocomplete(
           destinationInput.current,
-          autocompleteOptions
+          {}
         );
 
         google.maps.event.addListener(
@@ -81,8 +75,8 @@ export default function Home() {
           "place_changed",
           function () {
             const place = originAutocomplete.getPlace();
-            const fullAddress = place.name + ", " + place.formatted_address;
-            setOrigin(fullAddress);
+            console.log(place);
+            setOrigin(place.formatted_address);
           }
         );
 
@@ -91,8 +85,7 @@ export default function Home() {
           "place_changed",
           function () {
             const place = destinationAutocomplete.getPlace();
-            const fullAddress = place.name + ", " + place.formatted_address;
-            setDestination(fullAddress);
+            setDestination(place.formatted_address);
           }
         );
 
@@ -126,53 +119,54 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Get the route!</title>
+        <title>Get the distance</title>
       </Head>
-
       <div className={styles.parentContainer}>
-        <h1 className={styles.heading}>Get the route!</h1>
+        <div className={styles.formContainer}>
+          <h1 className={styles.heading}>Get the distance</h1>
 
-        <form onSubmit={submitForm}>
-          <div className={styles.inputContainer}>
-            <label className={styles.addressLabel} htmlFor="origin">
-              Origin address:
-            </label>
+          <form onSubmit={submitForm}>
+            <div className={styles.inputContainer}>
+              <label className={styles.addressLabel} htmlFor="origin">
+                Origin address:
+              </label>
+              <input
+                className={styles.addressInput}
+                id="origin"
+                onChange={(e) => setOrigin(e.target.value)}
+                value={origin}
+                ref={originInput}
+              />
+            </div>
+
+            <div className={styles.inputContainer}>
+              <label className={styles.addressLabel} htmlFor="destination">
+                Destination address:
+              </label>
+              <input
+                className={styles.addressInput}
+                id="destination"
+                onChange={(e) => setDestination(e.target.value)}
+                value={destination}
+                ref={destinationInput}
+              />
+            </div>
+
             <input
-              className={styles.addressInput}
-              id="origin"
-              onChange={(e) => setOrigin(e.target.value)}
-              value={origin}
-              ref={originInput}
+              className={styles.submitButton}
+              type="submit"
+              value="Search"
+              disabled={loading}
             />
-          </div>
+          </form>
 
-          <div className={styles.inputContainer}>
-            <label className={styles.addressLabel} htmlFor="destination">
-              Destination address:
-            </label>
-            <input
-              className={styles.addressInput}
-              id="destination"
-              onChange={(e) => setDestination(e.target.value)}
-              value={destination}
-              ref={destinationInput}
-            />
-          </div>
+          {loading ? <p className={styles.loading}>Loading...</p> : null}
+          {response ? <ShowDistanceMatrics distanceInfo={response} /> : null}
+          {error ? <p className={styles.errorMessage}>{error}</p> : null}
+        </div>
 
-          <input
-            className={styles.submitButton}
-            type="submit"
-            value="Search"
-            disabled={loading}
-          />
-        </form>
-
-        {loading ? <p className={styles.loading}>Loading...</p> : null}
-        {response ? <ShowDistanceMatrics distanceInfo={response.data} /> : null}
-        {error ? <p className={styles.errorMessage}>{error}</p> : null}
+        <div id="map" ref={googlemap}></div>
       </div>
-
-      <div id="map" ref={googlemap}></div>
     </>
   );
 }

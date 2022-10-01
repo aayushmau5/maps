@@ -1,4 +1,11 @@
 .parentContainer {
+  height: 100%;
+  display: flex;
+  gap: 4rem;
+  align-items: center;
+}
+
+.formContainer {
   width: 50%;
   margin: 0 auto;
 }
@@ -67,7 +74,12 @@
 }
 
 @media (max-width: 1000px) {
+  .formContainer {
+    width: 100%;
+  }
+
   .parentContainer {
-    width: 90%;
+    flex-direction: column;
+    gap: 0;
   }
 }

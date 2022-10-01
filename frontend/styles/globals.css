@@ -1,5 +1,5 @@
 #__next {
-  height: 50vh;
+  height: 93vh;
 }
 
 html,
@@ -28,6 +28,6 @@ a {
 
 @media (max-width: 1000px) {
   #map {
-    width: 90%;
+    width: 100%;
   }
 }
