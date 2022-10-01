@@ -4,6 +4,7 @@
 // TODO: handle cases when API request timesout(or the API limit is exhausted)
 
 const express = require("express");
+const cors = require("cors");
 require("dotenv").config();
 const {
   getDistance,
@@ -13,6 +14,8 @@ const {
 
 const app = express();
 const PORT = process.env.PORT || 8000;
+
+app.use(cors());
 
 app.get("/", async (req, res) => {
   const origin = req.query.origin;
