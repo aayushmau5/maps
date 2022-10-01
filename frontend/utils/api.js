@@ -1,7 +1,7 @@
 export async function getDistance(origin, destination) {
   const encodedOrigin = encodeURIComponent(origin);
   const encodedDestination = encodeURIComponent(destination);
-  const endpoint = `${process.env.BACKEND_API_URL}?origin=${encodedOrigin}&destination=${encodedDestination}`;
+  const endpoint = `${process.env.NEXT_PUBLIC_BACKEND_API_URL}?origin=${encodedOrigin}&destination=${encodedDestination}`;
 
   const response = await fetch(endpoint);
 

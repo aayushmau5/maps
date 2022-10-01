@@ -75,7 +75,6 @@ export default function Home() {
           "place_changed",
           function () {
             const place = originAutocomplete.getPlace();
-            console.log(place);
             setOrigin(place.formatted_address);
           }
         );
